@@ -3,7 +3,7 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
-import LoginStack from './components/LoginStack';
+import LoginStack from './routes/LoginStack';
 
 export default class App extends React.Component {
   constructor(props) {
