@@ -20,7 +20,7 @@ export default function Login({ navigation }) {
               <Label>Password</Label>
               <Input secureTextEntry={true} />
             </Item>
-            <Button iconLeft primary style={styles.button}>
+            <Button onPress={() => {navigation.navigate('DoctorHome')}}  iconLeft primary style={styles.button}>
               <Icon type="FontAwesome" name='arrow-right' />
               <Text>Login</Text>
             </Button>
