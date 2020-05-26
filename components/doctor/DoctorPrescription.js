@@ -6,10 +6,17 @@ export default class DoctorPrescription extends React.Component {
   render(props) {
     return (
       <Container>
-        <Content>
-          <Text>Prescription</Text>
+        <Content style={styles.content}>
+          <H2>Prescription</H2>
         </Content>
       </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  content: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+  }
+});

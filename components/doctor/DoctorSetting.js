@@ -6,10 +6,17 @@ export default class DoctorSetting extends React.Component {
   render(props) {
     return (
       <Container>
-        <Content>
-          <Text>Settings</Text>
+        <Content style={styles.content}>
+          <H2>Settings</H2>
         </Content>
       </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  content: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+  }
+});
