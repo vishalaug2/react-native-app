@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../components/login/Login';
 import Signup from '../components/login/Signup';
 import AppHeader from '../common/AppHeader';
-import DoctorHome from '../components/doctor/DoctorHome';
+import DoctorStack from '../routes/DoctorStack';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +20,7 @@ export default function AppStack() {
           }
         }} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="DoctorHome" component={DoctorHome} options={{
+        <Stack.Screen name="DoctorStack" component={DoctorStack} options={{
           header: ({ scene, previous, navigation }) => {
             return(
               <AppHeader />
