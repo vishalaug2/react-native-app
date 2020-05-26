@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Container, Header, Content, Text, H1, H2, H3, Form, Item, Input, Label, Button, Picker, Icon } from 'native-base';
 
-export default class Login extends React.Component {
-  render() {    
-    return (
+export default function Login({ navigation }) {
+   return (
       <Container>
         <Content style={styles.content}>        
         <H2>
@@ -24,11 +24,14 @@ export default class Login extends React.Component {
               <Icon type="FontAwesome" name='arrow-right' />
               <Text>Login</Text>
             </Button>
+            <Button onPress={() => {navigation.navigate('Signup')}} iconLeft success style={styles.button}>
+              <Icon type="FontAwesome" name='user' />
+              <Text>Sign up new Patient</Text>
+            </Button>
           </Form>
       </Content>
       </Container>
     );
-  }
 }
 
 const styles = StyleSheet.create({
