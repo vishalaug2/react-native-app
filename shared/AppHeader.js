@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Header, Left, Body, Right, Title, Icon } from 'native-base';
-
-
 export default class AppHeader extends Component {    
     render() {        
         return (            
