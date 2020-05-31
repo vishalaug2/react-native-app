@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from '../components/login/Login';
-import Signup from '../components/login/Signup';
-import AppHeader from '../common/AppHeader';
-import DoctorStack from '../routes/DoctorStack';
+import Login from '../screens/login/Login';
+import Signup from '../screens/login/Signup';
+import AppHeader from '../shared/AppHeader';
+import DoctorDrawer from './doctor/DoctorDrawer';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +20,7 @@ export default function AppStack() {
           }
         }} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="DoctorStack" component={DoctorStack} options={{
+        <Stack.Screen name="DoctorDrawer" component={DoctorDrawer} options={{
           header: ({ scene, previous, navigation }) => {
             return(
               <AppHeader />

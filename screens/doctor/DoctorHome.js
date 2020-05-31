@@ -6,9 +6,7 @@ export default class DoctorHome extends React.Component {
   render(props) {
     return (
       <Container>
-        <Content style={styles.content}>
-          <H2>Home</H2>
-        </Content>
+        <Content style={styles.content}></Content>
       </Container>
     );
   }
