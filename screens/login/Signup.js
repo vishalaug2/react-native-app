@@ -10,7 +10,7 @@ export default class Login extends React.Component {
       name: "",
       email: "",
       password: "",
-      confirm_password: "",
+      password_confirmation: "",
       phone: "",
       doctor: "",
       errors: {}
@@ -20,87 +20,90 @@ export default class Login extends React.Component {
 
   handleSignup() {
     const rules = {
-      name  : 'required',
-      email  : 'required',
-      password: 'required',
-      confirm_password: 'required',
-      phone: 'required',
+      name: 'required|min:6',
+      email: 'required|email',
+      password: 'required|min:4|confirmed',
+      phone: 'required|number',
       doctor: 'required'
     };
 
     const messages = {
-      'name.required' : 'Name is required',
-      'email.required'    : 'Email is required',
-      'password.required'    : 'Password is required',
-      'confirm_password.required'    : 'Confirm Password is required',
-      'phone.required'    : 'Phone is required',
-      'doctor.required'    : 'Select your Doctor'
+      'name.required': 'Name is required',
+      'name.min': 'Name should contain at least 6 chars',
+      'email.required': 'Email is required',
+      'email.email': 'Email should be valid',
+      'password.required': 'Password is required',
+      'password.min': 'Password should contain at least 4 chars',
+      'password.confirmed': 'Password & Confirm Password should be same',
+      'phone.required': 'Phone is required',
+      'phone.number': 'Phone should contains digits only',
+      'doctor.required': 'Select your Doctor'
     }
 
     validateAll(this.state, rules, messages)
-    .then(() => {
-      this.setState(this._initialState);
-      this.props.navigation.navigate('DoctorDrawer');
-    })
-    .catch((errors) => {
-      let formattedErrors = {};
-      errors.forEach(error => {
-        formattedErrors[error.field] = error.message;
+      .then(() => {
+        this.setState(this._initialState);
+      })
+      .catch((errors) => {
+        let formattedErrors = {};
+        errors.forEach(error => {
+          formattedErrors[error.field] = error.message;
+        });
+        this.setState({ errors: formattedErrors });
       });
-      this.setState({errors: formattedErrors});
-    });
   }
 
   render() {
+    console.log('----------------', this.state);
     return (
       <Container>
-        <Content style={styles.content}>        
-        <H2>
-          Create a Patient
+        <Content style={styles.content}>
+          <H2>
+            Create a Patient
         </H2>
-        <Form>
+          <Form>
             <Item stackedLabel error={(this.state.errors['name'] ? true : false)}>
               <Label>Name</Label>
-              <Input name="name" onChangeText={(name) => {this.setState({name})}} value={this.state.name} />
+              <Input name="name" onChangeText={(name) => { this.setState({ name }) }} value={this.state.name} />
             </Item>
             {this.state.errors['name'] && <Text style={styles.errorText}>{this.state.errors['name']}</Text>}
-            
-            <Item stackedLabel  error={(this.state.errors['email'] ? true : false)}>
+
+            <Item stackedLabel error={(this.state.errors['email'] ? true : false)}>
               <Label>Email</Label>
-              <Input name="email" onChangeText={(email) => {this.setState({email})}} value={this.state.email} />
+              <Input name="email" onChangeText={(email) => { this.setState({ email }) }} value={this.state.email} />
             </Item>
             {this.state.errors['email'] && <Text style={styles.errorText}>{this.state.errors['email']}</Text>}
-            
-            <Item stackedLabel  error={(this.state.errors['password'] ? true : false)}>
+
+            <Item stackedLabel error={(this.state.errors['password'] ? true : false)}>
               <Label>Password</Label>
-              <Input name="password" secureTextEntry={true} onChangeText={(password) => {this.setState({password})}} value={this.state.password} />
+              <Input name="password" secureTextEntry={true} onChangeText={(password) => { this.setState({ password }) }} value={this.state.password} />
             </Item>
             {this.state.errors['password'] && <Text style={styles.errorText}>{this.state.errors['password']}</Text>}
 
-            <Item stackedLabel  error={(this.state.errors['confirm_password'] ? true : false)}>
+            <Item stackedLabel error={(this.state.errors['password_confirmation'] ? true : false)}>
               <Label>Confirm Password</Label>
-              <Input name="confirm_password" secureTextEntry={true} onChangeText={(confirm_password) => {this.setState({confirm_password})}} value={this.state.confirm_password} />
+              <Input name="password_confirmation" secureTextEntry={true} onChangeText={(password_confirmation) => { this.setState({ password_confirmation }) }} value={this.state.password_confirmation} />
             </Item>
-            {this.state.errors['confirm_password'] && <Text style={styles.errorText}>{this.state.errors['confirm_password']}</Text>}
+            {this.state.errors['password_confirmation'] && <Text style={styles.errorText}>{this.state.errors['password_confirmation']}</Text>}
 
-            <Item stackedLabel  error={(this.state.errors['phone'] ? true : false)}>
+            <Item stackedLabel error={(this.state.errors['phone'] ? true : false)}>
               <Label>Phone</Label>
-              <Input name="phone" onChangeText={(phone) => {this.setState({phone})}} value={this.state.phone} />
+              <Input name="phone" onChangeText={(phone) => { this.setState({ phone }) }} value={this.state.phone} />
             </Item>
             {this.state.errors['phone'] && <Text style={styles.errorText}>{this.state.errors['phone']}</Text>}
 
             <Item picker style={styles.picker} error={(this.state.errors['doctor'] ? true : false)}>
-                 <Picker
+              <Picker
                 mode="dropdown"
                 iosHeader="Select your Doctor"
                 iosIcon={<Icon name="arrow-down" />}
                 style={{ width: undefined }}
                 name="doctor"
-                onChangeText={(doctor) => {this.setState({doctor})}}
-                >
-                    <Picker.Item label="Select your Doctor" value="" />
-                    <Picker.Item label="Dr. Vimal Kumar" value="1" />
-                </Picker>
+                onChangeText={(doctor) => { this.setState({ doctor }) }}
+              >
+                <Picker.Item label="Select your Doctor" value="" />
+                <Picker.Item label="Dr. Vimal Kumar" value="1" />
+              </Picker>
             </Item>
             {this.state.errors['doctor'] && <Text style={styles.errorText}>{this.state.errors['doctor']}</Text>}
 
@@ -108,7 +111,7 @@ export default class Login extends React.Component {
               <Text>Create account</Text>
             </Button>
           </Form>
-      </Content>
+        </Content>
       </Container>
     );
   }
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
     width: "42%"
   },
   picker: {
-      marginTop: 20
+    marginTop: 20
   },
   errorText: {
     color: 'red',
