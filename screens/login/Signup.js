@@ -23,7 +23,7 @@ export default class Login extends React.Component {
       name: 'required|min:6',
       email: 'required|email',
       password: 'required|min:4|confirmed',
-      phone: 'required|number',
+      phone: 'required:min:10',
       doctor: 'required'
     };
 
@@ -36,7 +36,7 @@ export default class Login extends React.Component {
       'password.min': 'Password should contain at least 4 chars',
       'password.confirmed': 'Password & Confirm Password should be same',
       'phone.required': 'Phone is required',
-      'phone.number': 'Phone should contains digits only',
+      'phone.min': 'Phone should contain at least 10 digits',
       'doctor.required': 'Select your Doctor'
     }
 
@@ -54,7 +54,6 @@ export default class Login extends React.Component {
   }
 
   render() {
-    console.log('----------------', this.state);
     return (
       <Container>
         <Content style={styles.content}>
@@ -74,6 +73,12 @@ export default class Login extends React.Component {
             </Item>
             {this.state.errors['email'] && <Text style={styles.errorText}>{this.state.errors['email']}</Text>}
 
+            <Item stackedLabel error={(this.state.errors['phone'] ? true : false)}>
+              <Label>Phone</Label>
+              <Input name="phone" onChangeText={(phone) => { this.setState({ phone }) }} value={this.state.phone} />
+            </Item>
+            {this.state.errors['phone'] && <Text style={styles.errorText}>{this.state.errors['phone']}</Text>}
+
             <Item stackedLabel error={(this.state.errors['password'] ? true : false)}>
               <Label>Password</Label>
               <Input name="password" secureTextEntry={true} onChangeText={(password) => { this.setState({ password }) }} value={this.state.password} />
@@ -85,12 +90,6 @@ export default class Login extends React.Component {
               <Input name="password_confirmation" secureTextEntry={true} onChangeText={(password_confirmation) => { this.setState({ password_confirmation }) }} value={this.state.password_confirmation} />
             </Item>
             {this.state.errors['password_confirmation'] && <Text style={styles.errorText}>{this.state.errors['password_confirmation']}</Text>}
-
-            <Item stackedLabel error={(this.state.errors['phone'] ? true : false)}>
-              <Label>Phone</Label>
-              <Input name="phone" onChangeText={(phone) => { this.setState({ phone }) }} value={this.state.phone} />
-            </Item>
-            {this.state.errors['phone'] && <Text style={styles.errorText}>{this.state.errors['phone']}</Text>}
 
             <Item picker style={styles.picker} error={(this.state.errors['doctor'] ? true : false)}>
               <Picker
