@@ -7,11 +7,12 @@ export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+    this._initialState = {
       username: '',
       password: '',
       errors: {}
-    }
+    };
+    this.state = { ...this._initialState };
   }
 
   checkLogin() {
@@ -27,7 +28,7 @@ export default class Login extends React.Component {
 
     validateAll(this.state, rules, messages)
     .then(() => {
-      this.setState({errors: {}});
+      this.setState(this._initialState);
       this.props.navigation.navigate('DoctorDrawer');
     })
     .catch((errors) => {
