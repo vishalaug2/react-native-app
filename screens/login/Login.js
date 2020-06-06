@@ -63,7 +63,7 @@ export default class Login extends React.Component {
               <Icon type="FontAwesome" name='arrow-right' />
               <Text>Login</Text>
             </Button>
-            <Button onPress={() => { this.props.navigation.navigate('Signup') }} iconLeft success style={styles.button}>
+            <Button onPress={() => { this.setState(this._initialState); this.props.navigation.navigate('Signup'); }} iconLeft success style={styles.button}>
               <Icon type="FontAwesome" name='user' />
               <Text>Sign up new Patient</Text>
             </Button>
