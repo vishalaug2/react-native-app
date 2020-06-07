@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Header, Content, Text, H1, H2, H3, Form, Item, Input, Label, Button, Picker, Icon } from 'native-base';
-import { validateAll } from 'indicative/validator'
+import { validateAll } from 'indicative/validator';
+import axios from "axios";
 
 export default class Login extends React.Component {
 
@@ -10,6 +11,7 @@ export default class Login extends React.Component {
     this._initialState = {
       username: '',
       password: '',
+      loading: false,
       errors: {}
     };
     this.state = { ...this._initialState };
@@ -28,8 +30,18 @@ export default class Login extends React.Component {
 
     validateAll(this.state, rules, messages)
     .then(() => {
-      this.setState(this._initialState);
-      this.props.navigation.navigate('DoctorDrawer');
+      axios.post('https://1fdc7a6c35e0.ngrok.io/login', {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then((r) => {
+        console.log("------------success", r);
+        //this.setState(this._initialState);
+        //this.props.navigation.navigate('DoctorDrawer');
+      })
+      .catch((err) => {
+        console.log("------------error", err);
+      });
     })
     .catch((errors) => {
       let formattedErrors = {};
